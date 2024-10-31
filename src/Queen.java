@@ -13,14 +13,16 @@ public class Queen extends ChessPiece {
         return "Q";
     }
 
-    public boolean canMoveToPosition(ChessBoard chessBoard, int line, int colum, int toLine, int toColum) {
-        if (isValidMove(chessBoard, line, colum, toLine, toColum)) {
+    public boolean canMoveToPosition(ChessBoard chessBoard, int line, int column, int toLine, int toColumn) {
+        if (!(isValidMove(chessBoard, line, column, toLine, toColumn))) {
             return false;
         }
-
-
+        if (!(isPathClear(chessBoard, line, column, toLine, toColumn))) {
+            return false;
+        }
+        // Движение королевы
         int deltaLine = Math.abs(line - toLine);
-        int deltaColum = Math.abs(colum - toColum);
-        return (deltaLine == deltaColum) || line == toLine || colum == toColum;
+        int deltaColum = Math.abs(column - toColumn);
+        return (deltaLine == deltaColum) || line == toLine || column == toColumn;
     }
 }

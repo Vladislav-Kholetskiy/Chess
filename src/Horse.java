@@ -14,14 +14,14 @@ public class Horse extends ChessPiece {
         return "H";
     }
 
-    public boolean canMoveToPosition(ChessBoard chessBoard, int line, int colum, int toLine, int toColum) {
-        if (isValidMove(chessBoard, line, colum, toLine, toColum)) {
+    public boolean canMoveToPosition(ChessBoard chessBoard, int line, int colum, int toLine, int toColumn) {
+        if (!(isValidMove(chessBoard, line, colum, toLine, toColumn))) {
             return false;
         }
-
+        // Движение коня
         int deltaLine = Math.abs(line - toLine);
-        int deltaColum = Math.abs(colum - toColum);
+        int deltaColumn = Math.abs(colum - toColumn);
 
-        return ((deltaLine == 2 && deltaColum == 1) || (deltaLine == 1 && deltaColum == 2));
+        return ((deltaLine == 2 && deltaColumn == 1) || (deltaLine == 1 && deltaColumn == 2));
     }
 }

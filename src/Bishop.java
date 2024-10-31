@@ -14,12 +14,16 @@ public class Bishop extends ChessPiece {
         return "B";
     }
 
-    public boolean canMoveToPosition(ChessBoard chessBoard, int line, int colum, int toLine, int toColum) {
-        if (isValidMove(chessBoard, line, colum, toLine, toColum)) {
+    public boolean canMoveToPosition(ChessBoard chessBoard, int line, int column, int toLine, int toColumn) {
+        if (!(isValidMove(chessBoard, line, column, toLine, toColumn))) {
             return false;
         }
+        if (!(isPathClear(chessBoard, line, column, toLine, toColumn))) {
+            return false;
+        }
+        //Движение слона
         int deltaLine = Math.abs(line - toLine);
-        int deltaColum = Math.abs(colum - toColum);
+        int deltaColum = Math.abs(column - toColumn);
 
         return (deltaColum == deltaLine);
     }

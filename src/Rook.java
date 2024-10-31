@@ -14,11 +14,15 @@ public class Rook extends ChessPiece {
         return "R";
     }
 
-    public boolean canMoveToPosition(ChessBoard chessBoard, int line, int colum, int toLine, int toColum) {
-        if (isValidMove(chessBoard, line, colum, toLine, toColum)) {
+    public boolean canMoveToPosition(ChessBoard chessBoard, int line, int column, int toLine, int toColum) {
+        if (!(isValidMove(chessBoard, line, column, toLine, toColum))) {
             return false;
         }
-        return line == toLine || colum == toColum;
+        if (!(isPathClear(chessBoard, line, column, toLine, toColum))) {
+            return false;
+        }
+        // Двмжение ладьи
+        return line == toLine || column == toColum;
     }
 }
 
