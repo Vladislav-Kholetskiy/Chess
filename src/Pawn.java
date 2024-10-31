@@ -19,6 +19,7 @@ public class Pawn extends ChessPiece {
             return false;
         }
         int deltaLine = line - toLine;
+        int deltaColum = colum - toColum;
         if (color.equals("White")) {
             if ((line == 1 && (deltaLine == -1 || deltaLine == -2))) {
                 return true;

@@ -54,11 +54,54 @@ public class ChessBoard {
         return pos >= 0 && pos <= 7;
     }
 
-    public boolean castling7() {
-        return true;
+    public boolean castling0() {
+        int line = nowPlayer.equals("White") ? 0 : 7;
+        int kingColumn = 4;
+        int rookColumn = 0;
+        ChessPiece king = board[line][kingColumn];
+        ChessPiece rook = board[rookColumn][rookColumn];
+        if (king instanceof King && rook instanceof Rook && king.check && rook.check && board[line][kingColumn - 1] == null && board[line][kingColumn - 2] == null
+                && board[line][kingColumn - 3] == null) {
+            if (((King) king).isUnderAttack(this, line, kingColumn) && ((King) king).isUnderAttack(this, line, kingColumn - 1)
+                    && ((King) king).isUnderAttack(this, line, kingColumn - 2) && ((King) king).isUnderAttack(this, line, kingColumn - 3)) {
+                board[line][kingColumn] = null;
+                board[line][kingColumn - 2] = king;
+                board[line][rookColumn] = null;
+                board[line][kingColumn - 1] = rook;
+
+                king.check = false;
+                rook.check = false;
+
+                this.nowPlayer = this.nowPlayerColor().equals("White") ? "Black" : "White";
+                return true;
+            }
+        }
+        return false;
     }
 
-    public boolean castling0() {
-        return true;
+    public boolean castling7() {
+        int line = nowPlayer.equals("White") ? 0 : 7;
+        int kingColumn = 4;
+        int rookColumn = 7;
+        ChessPiece king = board[line][kingColumn];
+        ChessPiece rook = board[rookColumn][rookColumn];
+        if (king instanceof King && rook instanceof Rook && king.check && rook.check && board[line][kingColumn + 1] == null && board[line][kingColumn + 2] == null) {
+            if (((King) king).isUnderAttack(this, line, kingColumn) && ((King) king).isUnderAttack(this, line, kingColumn + 1)
+                    && ((King) king).isUnderAttack(this, line, kingColumn + 2)) {
+                board[line][kingColumn] = null;
+                board[line][kingColumn + 2] = king;
+                board[line][rookColumn] = null;
+                board[line][kingColumn + 1] = rook;
+
+                king.check = false;
+                rook.check = false;
+
+                this.nowPlayer = this.nowPlayerColor().equals("White") ? "Black" : "White";
+                return true;
+            }
+        }
+        return false;
     }
+
+
 }
